@@ -51,6 +51,22 @@ export default new Vuex.Store({
     logout () {
       localStorage.removeItem('access_token')
       this.$router.push('/')
+    },
+    register (context, payload) {
+      axios({
+        method: 'post',
+        url: `${baseURL}/register`,
+        data: {
+          email: payload.email,
+          password: payload.password
+        }
+      })
+        .then(({ data }) => {
+          router.push('/login')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   },
   modules: {
